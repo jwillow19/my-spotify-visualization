@@ -1,6 +1,10 @@
 import sqlite3
 import os
 
+"""
+Database Class for establishing connection to sqlite DB and making queries
+"""
+
 
 class Database(object):
     def __init__(self, dbFileName, *args, **kwargs):
