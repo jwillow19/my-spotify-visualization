@@ -47,3 +47,32 @@ def parse_track(item):
     #                'popularity': album_popularity,
     #                'duration': duration},
     #         'features': feature}
+
+
+def item_to_row(item):
+    '''
+    Parses one item from the playlist and transform it to row 
+    For converting to DataFrame
+    '''
+    track = item['track']
+
+    track_name = item['track']['name']
+    track_artists = [artist['name'] for artist in track['artists']]
+    by, feature = track_artists[0], track_artists[1:]
+
+    if not feature:
+        feature = None
+
+    album_name, album_image = track['album']['name'], track['album']['images'][0]['url']
+    release_date = track['album']['release_date']
+    album_popularity = track['popularity']
+    duration = convert_ms(track['duration_ms'])
+
+    return [track_name,
+            by,
+            feature,
+            album_name,
+            album_image,
+            release_date,
+            album_popularity,
+            duration]
